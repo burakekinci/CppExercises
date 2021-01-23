@@ -1,25 +1,25 @@
-//	Burak EKÝNCÝ
-//	1306181431
-//  Date : 05.12.2020
-//  Development Environment : Visual Studio 2019
+//Burak EKINCI
+//1306181431
+//Date : 05.12.2020
+//Development Environment : Visual Studio 2019
 
 
 #include <iostream>
 #include <string>
 #include <math.h>
 
-void printUI();										//prints UI
+void printUI();								//prints UI
 
 void Rectangle1(int _input);						//
 void Rectangle2(int _input);						//
 void Rectangle3(int _input);						//draws patterns
 void Rectangle4(int _input);						//
-void Rhomb(int _input);								//
-void Circle(int _input);							//
+void Rhomb(int _input);							//
+void Circle(int _input);						//
 
 bool takeInput(int &_input);						//checks input, if input is integer turns true else turns false
 bool UImanager(int& _choiceInput);					//checks choice input, if input value is not in UI list turns false else turns true
-bool UImanager(int& _choiceInput, int& _dimensionInput);//after proper choice checks for value input, if input is proper turns true else turns false
+bool UImanager(int& _choiceInput, int& _dimensionInput);                //after proper choice checks for value input, if input is proper turns true else turns false
 
 int main() 
 {
@@ -29,7 +29,7 @@ int main()
 	bool b_dimension;
 	do 
 	{
-		system("cls");								//clear console
+		system("cls");						//clear console
 		printUI();
 		std::cout << "|Enter your choice : ";
 
@@ -40,11 +40,11 @@ int main()
 		b_choice = UImanager(choiceInput);			//check choiceInput is proper for UI list, if not returns false else does the management
 		if (b_choice == false) continue;			//if b_choice false ask again to user for input
 		
-		std::cout << "|Enter your dimension : ";			//after selected pattern, wait for the dimension
-		b_dimension = takeInput(dimensionInput);			//check dimensionInput is integer, if not returns false
-		if (b_dimension == false) continue;					//if b_dimension false ask again to user for input
-		b_dimension = UImanager(choiceInput,dimensionInput);//check dimensionInput is proper for UI list, if not returns false else does the management
-		if (b_dimension == false) continue;					//if b_dimension false ask again to user for input
+		std::cout << "|Enter your dimension : ";		//after selected pattern, wait for the dimension
+		b_dimension = takeInput(dimensionInput);		//check dimensionInput is integer, if not returns false
+		if (b_dimension == false) continue;			//if b_dimension false ask again to user for input
+		b_dimension = UImanager(choiceInput,dimensionInput);    //check dimensionInput is proper for UI list, if not returns false else does the management
+		if (b_dimension == false) continue;			//if b_dimension false ask again to user for input
 
 		system("pause");
 	} while (true);
@@ -71,19 +71,19 @@ void printUI()
 bool takeInput(int& input)
 {
 	std::string _strInput;
-	bool isFine = false;					//is input fine?
+	bool isFine = false;					        //is input fine?
 	//check is input integer and take one integer
 	do
 	{
 		
-		std::cin >> _strInput;				//get the input
+		std::cin >> _strInput;					//get the input
 		std::cin.clear();					//clear error flag
-		std::cin.ignore(INT_MAX, '\n');		//ignore until '\n'
+		std::cin.ignore(INT_MAX, '\n');				//ignore until '\n'
 		
 		//is input integer or string
 		for(unsigned int i = 0;i < _strInput.length();i++)
 		{	
-			if(isdigit(_strInput[i])==0)	//if isdigit returns 0 it means there is a character which is not digit so string is not integer
+			if(isdigit(_strInput[i])==0)			//if isdigit returns 0 it means there is a character which is not digit so string is not integer
 			{
 				isFine = false;
 				std::cout << "|Your input is : " << _strInput << " |\n";
@@ -104,13 +104,13 @@ bool takeInput(int& input)
 		if(isFine == true){input = std::stoi(_strInput);}
 		else
 		{
-			continue;	//if input not integer ask again to user
+			continue;					//if input not integer ask again to user
 		}
 		
 
 	}while(isFine==false);
-	std::cout <<"|Your input is : "<< _strInput<<" |\n";	//prints user input
-	std::cout << "|__________________|\n";
+	std::cout <<"|Your input is : "<< _strInput<<" |\n";	   	//prints user input
+	std::cout << "|__________________|\n";		
 	return true;
 }
 
@@ -189,9 +189,9 @@ bool UImanager(int& _choiceInput)
 void Rectangle1(int _input)
 {
 	std::cout << "Rectangle 1\n";
-	for (int i = 0; i < _input ; i++)	//Y-axis
+	for (int i = 0; i < _input ; i++)		//Y-axis
 	{
-		for (int j = 0; j < i+1 ; j++)  //X-axis
+		for (int j = 0; j < i+1 ; j++)  	//X-axis
 		{
 			std::cout << "*";
 		}
@@ -204,7 +204,7 @@ void Rectangle2(int _input)
 	std::cout << "Rectangle 2\n";
 	for (int i = 0; i < _input; i++)		 //Y-axis
 	{
-		for (int j = 0; j < _input - i; j++) //X-axis
+		for (int j = 0; j < _input - i; j++) 	 //X-axis
 		{
 			std::cout << "*";
 		}
@@ -217,11 +217,11 @@ void Rectangle3(int _input)
 	std::cout << "Rectangle 3\n";
 	for (int i = 0; i < _input; i++)		 //Y-axis
 	{
-		for (int j = 0; j < _input - i-1; j++) //X axis(first part)
+		for (int j = 0; j < _input - i-1; j++) 	 //X axis(first part)
 		{
 			std::cout << " ";
 		}
-		for (int j = 0; j < i+1; j++)		//X axis (second part)
+		for (int j = 0; j < i+1; j++)		 //X axis (second part)
 		{
 			std::cout << "*";
 		}
@@ -233,13 +233,13 @@ void Rectangle4(int _input)
 {
 	int n = _input / 2;
 	std::cout << "Rectangle 4\n";
-	for (int i = 1; i < n+2; i++)			//Y axis
+	for (int i = 1; i < n+2; i++)			 //Y axis
 	{
-		for (int j = 0; j < n - i+1; j++)	//X axis(first part)
+		for (int j = 0; j < n - i+1; j++)	 //X axis(first part)
 		{
 			std::cout << " ";
 		}
-		for (int j = 0; j < 2 * i - 1; j++) //X axis (second part)
+		for (int j = 0; j < 2 * i - 1; j++) 	 //X axis (second part)
 		{
 			std::cout << "*";
 		}
@@ -264,13 +264,13 @@ void Rhomb(int _input)
 		}
 		std::cout << "\n";
 	}
-	for (int i = 1; i <= n -1; i++)					//Y axis(second part)
+	for (int i = 1; i <= n -1; i++)			//Y axis(second part)
 	{
-		for (int j = 1; j <= i; j++)				//X axis(first part)
+		for (int j = 1; j <= i; j++)		//X axis(first part)
 		{
 			std::cout << " ";
 		}
-		for (int j = 1; j <= 2 * (n -i) - 1; j++)	//X axis (second part)
+		for (int j = 1; j <= 2 * (n -i) - 1; j++)//X axis (second part)
 		{
 			std::cout << "*";
 		}
@@ -282,8 +282,8 @@ void Rhomb(int _input)
 
 void Circle(int _input)
 {
-	int c = _input / 2 + 1;		//center point in coordinate system
-	int r = _input - c;			//radius length
+	int c = _input / 2 + 1;				//center point in coordinate system
+	int r = _input - c;				//radius length
 	std::cout << "Circle\n";
 	for (int i = 1; i <= _input; i++)		//Y axis of coordinate system
 	{
