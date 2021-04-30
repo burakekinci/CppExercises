@@ -1,4 +1,4 @@
-// Burak EKÝNCÝ 
+// Burak EKİNCİ 
 // 1306181431
 // Date: 15.01.2021
 // Development Environment: Visual Studio2019
