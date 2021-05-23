@@ -12,66 +12,42 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <map>
 using namespace std;
 
-
-// Data structure to store a graph edge
-struct Edge {
-    string src, dest;
-};
+void readFile(ifstream& file, map<string, vector<string>>& _map, vector<string>& _paths);
 
 
-class Graph
-{
-public:
-    vector<vector<string>> adjList;
-    Graph();
-};
 
-Graph::Graph()
-{
-    //graph constructor
-}
-
-void readFile(ifstream& file, vector<Edge>& edges);
 
 int main()
 {
-    vector<Edge> edges;
-    ifstream inputFile;
-    inputFile.open("input.txt");
-    if (inputFile.is_open())
+    map<string, vector<string>> map;
+    vector<string> paths;
+    ifstream inFile;
+    inFile.open("input.txt");
+    if (inFile.is_open())
     {
         cout << "Input dosyasi basariyla acildi\n";
-        readFile(inputFile,edges);
+        readFile(inFile, map, paths);
     }
     else
     {
         cout << "Input dosyasi ACİLAMADİ!!\n";
     }
-
     return 0;
 }
 
-void readFile(ifstream& file, vector<Edge>& edges) 
+void readFile(ifstream& file, map<string,vector<string>>& _map, vector<string>& _paths)
 {
-    string tmpStr=" ";
-    
+    string tmpStr = " ";
+
     //read all nodes, first row of input.txt file
-    getline(file, tmpStr);                                  
-    
-    //Seperate nodes according to commas then push back nodes to the Nodes vector
-   /* stringstream ss(tmpStr);
-    while (ss.good()) {
-        string substr;
-        getline(ss, substr, ',');
-        nodes.push_back(substr);
-    }
-    */
+    getline(file, tmpStr);
 
     //get the "Links:" string
     getline(file, tmpStr);
-    if (tmpStr == "Links:") 
+    if (tmpStr == "Links:")
         cout << "Links bulundu\n";
     else
         cout << "Links Bulunamadi!!\n";
@@ -86,14 +62,27 @@ void readFile(ifstream& file, vector<Edge>& edges)
         }
         string delimiter = "->";
         string node_src = tmpStr.substr(0, tmpStr.find(delimiter));
-        string node_dest = tmpStr.substr(tmpStr.find(delimiter)+2);
+        string node_dest = tmpStr.substr(tmpStr.find(delimiter) + 2);
         
-        edges.push_back({ node_src, node_dest });
+        //first check is node_src in the map keys
+        //if node_src is not in map then...
+        if (_map.find(node_src) == _map.end())
+        {
+            //add node_src into the map keys with node_dest implemented vector
+            _map.insert(pair<string, vector<string>>(node_src, vector<string>{node_dest}));
+        }
+        //if node_src is in map then...
+        else
+        {
+            //add node_dest into the value vector of node_src 
+            map<string, vector<string>>::iterator it = _map.find(node_src);
+            it->second.push_back(node_dest);
+        }
     }
 
     //get the paths informations
     while (getline(file, tmpStr))
     {
-        cout << tmpStr << "\n";
+        _paths.push_back(tmpStr);
     }
 }
